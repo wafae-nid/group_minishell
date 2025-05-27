@@ -250,32 +250,6 @@ static void handling_new_changes(t_environ **new, t_environ **environ)
     replace_node(new, environ); 
 }
 
-static void make_export_struct(char **splited_arg, t_environ **environ)
-{
-    t_environ *new;
-    t_environ *current;
-    int count ;
-    int i;
-    
-   (1&& (count = 0), (i = 1 ));
-    if(splited_arg)
-    {
-        while(splited_arg[i])
-        {
-            new = ft_lstnew_environ(splited_arg[i]);
-            if(is_the_var_in_environ(new->var, *environ))
-            {
-                handling_new_changes(&new, environ);
-            }
-            else 
-            {
-                ft_lstadd_back_environ(environ, new);
-            }   
-            i++;
-        }
-    }
-}
-
 static int input_struct_handling(char *arg)
 {
     int var_name_end_;
@@ -297,6 +271,35 @@ static int input_struct_handling(char *arg)
         return(0);
  
 }
+static void make_export_struct(char **command, t_environ **environ)
+{
+    t_environ *new;
+    t_environ *current;
+    int count ;
+    int i;
+    
+   (1&& (count = 0), (i = 1 ));
+    if(command)
+    {
+        while(command[i])
+        {
+            if(valid_position_export(command[i]))
+            {
+                if(input_struct_handling(command[i]))
+                    i++;
+                new = ft_lstnew_environ(command[i]);
+                if(is_the_var_in_environ(new->var, *environ))
+                    handling_new_changes(&new, environ);
+                else 
+                ft_lstadd_back_environ(environ, new);
+            }
+            else
+                printf("syntax error!");
+            i++;
+        }
+    }
+}
+
 
 static void export_no_arg(t_environ **environ)
 {
@@ -329,21 +332,20 @@ void export_parssing(char **command, t_environ **environ)
             export_no_arg(environ);
             return;
         }
-        while(command[i])
-        {
-            if(valid_position_export(command[i]))
-            {
-                if(input_struct_handling(command[i]))
-                    return;
-            }
-            else 
-            {
-                printf("syntax error!");
-                return;
-            } 
-            i++; 
-        }
+        // while(command[i])
+        // {
+        //     if(valid_position_export(command[i]))
+        //     {
+        //         if(input_struct_handling(command[i]))
+        //             return;
+        //     }
+        //     else 
+        //     {
+        //         printf("syntax error!");
+        //     } 
+            // i++; 
         make_export_struct(command,environ);
+        
     }
 }
 
