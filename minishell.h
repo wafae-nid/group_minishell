@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 14:51:47 by zatalbi           #+#    #+#             */
-/*   Updated: 2025/05/27 17:31:34 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/05/27 22:27:27 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,10 @@ void	ft_free_tree(t_tree *tree);
 void	ft_free_argv(char **argv);
 
 /* ************************************** */
+
+# define PATH "PATH=/home/wnid-hsa/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/wnid-hsa/.local/bin"
+
+ 
 typedef struct s_environ
 {
 	char *var;
@@ -122,6 +126,7 @@ void  pwd_execution(char **command, char **PWD);
 void recursion(t_tree *tree, char **PWD, char **OLDPWD);
 void unset_executing(char **command, t_environ **environ);
 void export_parssing(char **command, t_environ **environ);
+int is_the_var_in_environ(char *variable, t_environ *environ);
 
 
 #endif

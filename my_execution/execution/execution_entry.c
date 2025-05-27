@@ -40,6 +40,7 @@
 
 static void execute_the_builtin(char **command, char **PWD, t_environ **s_environ, char **OLDPWD)
 {
+    
     if(!ft_strcmp(command[0], "echo"))
         echo_execution(command);
     else if(!ft_strcmp(command[0], "cd"))
@@ -80,7 +81,7 @@ static void execution_entery(char **command, char **PWD, char **OLDPWD)
     if(built_in == 1)
         execute_the_builtin(command, PWD,&environ,OLDPWD);
     else
-        printf("print with childy\n");
+        printf("==> print with childy <==\n");
 }
 
 void recursion(t_tree *tree, char **PWD, char **OLDPWD)

@@ -27,16 +27,48 @@ static void  cd_oldpwd(t_environ **environ, char **PWD, char **OLDPWD)
 		changing_nodes(environ,"PWD", *OLDPWD);
 		*PWD = ft_strdup(*OLDPWD);
 		*OLDPWD = ft_strdup(old_pwd);
-		current = (*environ);
+		printf("%s\n", *PWD);
 	}
 	else
 		printf("error!");
+}
+static int is_home_set(t_environ **environ)
+{
+	t_environ *current;
+
+	current = (*environ);
+	while(current)
+	{
+		if(!strcmp(current->var,"HOME"))
+		{
+			if(!(current->value))
+			{
+				printf("home is unset\n");
+				return(0);
+			}
+			if(!strcmp(current->value, ""))
+			{
+				printf("home is set but empty\n");
+				return(0);
+			}
+			return(1);
+			break;
+		}
+		current=current->next;
+	}
+	printf("home is unset\n");
+	return(0);
 }
 
 static void cd_home(t_environ **environ, char **PWD, char **OLDPWD)
 {
     char *HOME;
-    
+	t_environ *current;
+	int flag;
+
+	flag =is_home_set(environ);
+	if(flag ==0)
+		return;
     HOME=getenv("HOME");
 	if(!chdir(HOME))
 	{

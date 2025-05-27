@@ -68,17 +68,16 @@ static int unsetting_input_parsing(char *variable, t_environ **environ)
 void unset_executing(char **command, t_environ **environ)
 {
     
+    // printf("%s\n",command[1]);
     if(command[1])
     {
-        if(!valid_var_name(command[1]))
+        if(ft_strcmp(command[1],"_") && !valid_var_name(command[1]))
         {
             printf("invalid identifier\n");
             return;
         }
-        if(unsetting_input_parsing(command[1], environ))
-        {
+        if(ft_strcmp(command[1],"_") &&  unsetting_input_parsing(command[1], environ))
             unsetting_input(command[1], environ);
-        }
         else
             return;
     }

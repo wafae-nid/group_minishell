@@ -192,8 +192,7 @@ static char  **split_environ(char *str)
      return(splited_export_char);
 }
 
-
-static int is_the_var_in_environ(char *variable, t_environ *environ)
+int is_the_var_in_environ(char *variable, t_environ *environ)
 {
     t_environ *current = environ;
    while(current)

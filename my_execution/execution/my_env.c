@@ -5,27 +5,30 @@ t_environ *making_the_environ_struct(void)
 {
     extern char **environ;
     t_environ *s_environ;
+    int flag;
     t_environ *new;
-    
-    s_environ = NULL;
-    
-    int count ;
-    
     int i;
-    count = 0;
-    
+
+    (1 && (s_environ = NULL),(flag = 0));
     if(environ)
     {
         i = 0;
         while(environ[i])
         {
+            if(!ft_strcmp(environ[i], PATH))
+                flag = 1;
             new = ft_lstnew_environ(environ[i]);
             ft_lstadd_back_environ(&s_environ, new);
             i++;
         }
+        if(!flag)
+        {
+            new = ft_lstnew_environ(PATH);
+            ft_lstadd_back_environ(&s_environ, new);
+        }
         return(s_environ);
     }
-    else 
+    else  
         return(NULL);
 }
 
