@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 14:51:47 by zatalbi           #+#    #+#             */
-/*   Updated: 2025/05/26 18:05:41 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/05/26 23:27:22 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,9 +119,9 @@ t_environ  *ft_lstnew_environ(char *str);
 void	ft_lstadd_back_environ(t_environ **lst, t_environ *new);
 t_environ *making_the_environ_struct(void);
 void  pwd_execution(char **command);
-void recursion(t_tree *tree, char *PWD, char *OLDPWD);
-
-
+void recursion(t_tree *tree, char **PWD, char **OLDPWD);
+void unset_executing(char **command, t_environ **environ);
+void export_parssing(char **command, t_environ **environ);
 
 
 #endif

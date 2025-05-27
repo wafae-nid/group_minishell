@@ -28,38 +28,14 @@ static void  cd_oldpwd(t_environ **environ, char **PWD, char **OLDPWD)
 		*PWD = ft_strdup(*OLDPWD);
 		*OLDPWD = ft_strdup(old_pwd);
 		current = (*environ);
-		// while((current))
-		// {
-		// 	if(current->value)
-        // 	{
-        //     	printf("%s", current->var);
-        //     	printf("=");
-        //     	printf("%s", current->value);
-        //     	printf("\n");
-        // 	}
-		// 		current = current->next;
-		// }
 	}
 	else
 		printf("error!");
 }
-// static void cd_home(char *PWD)
-// {
-//     char *HOME;
-    
-//     HOME=getenv("HOME");
-// 	if(!chdir(HOME))
-// 	{
-// 		setenv("OLDPWD", PWD,1);
-// 		setenv("PWD", HOME,1);
-// 	}
-// 	else
-// 		printf("error!");
-// }
+
 static void cd_home(t_environ **environ, char **PWD, char **OLDPWD)
 {
     char *HOME;
-	// t_environ *current;
     
     HOME=getenv("HOME");
 	if(!chdir(HOME))
@@ -68,18 +44,6 @@ static void cd_home(t_environ **environ, char **PWD, char **OLDPWD)
 		changing_nodes(environ, "OLDPWD",*PWD);
 		*PWD = ft_strdup(HOME);
 		changing_nodes(environ,"PWD", HOME);
-		// current = (*environ);
-		// while((current))
-		// {
-		// 	if(current->value)
-        // 	{
-        //     	printf("%s", current->var);
-        //     	printf("=");
-        //     	printf("%s", current->value);
-        //     	printf("\n");
-        // 	}
-		// 	current = current->next;
-		// }
 	}
 	else
 		printf("error!");
@@ -101,7 +65,6 @@ static char *get_deleted_path_gain(char *PWD, char *new)
 static void new_path_cd(t_environ **environ, char *new, char **PWD, char **OLDPWD)
 {
     char *new_path;
-	// t_environ *current;
 	
 	if(!chdir(new))
 	{
@@ -115,18 +78,6 @@ static void new_path_cd(t_environ **environ, char *new, char **PWD, char **OLDPW
 		changing_nodes(environ, "OLDPWD",*PWD);
 		*PWD = new_path;
 		changing_nodes(environ,"PWD", new_path);
-		// current = *environ;
-		// while((current))
-		// {
-		// 	if(current->value)
-        // 	{
-        //     	printf("%s", current->var);
-        //     	printf("=");
-        //     	printf("%s", current->value);
-        //     	printf("\n");
-        // 	}
-		// 	current = current->next;
-		// }
 	}
 	else
 	{
@@ -157,11 +108,6 @@ void cd_execution(char **command, char **PWD, t_environ **environ, char **OLDPWD
         printf("too many arguments");
         return;
     }
-	// if(command[1] && access(command[1],F_OK)!= 0)
-	// {
-	// 	printf("directory not found");
-	// 	return;
-    // }
 	else if((command)[1] && !strcmp((command)[1],"-"))
         cd_oldpwd(environ ,PWD,OLDPWD);
 	else if (((command)[1] && !strcmp((command)[1], "~")) || (command)[1]== NULL)

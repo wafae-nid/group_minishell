@@ -51,7 +51,7 @@ static void execute_the_builtin(char **command, char **PWD, t_environ **s_enviro
     else if(!ft_strcmp(command[0], "export"))
     {
         printf("export\n");
-        // export_parssing(command, s_environ);
+        export_parssing(command, s_environ);
     }
     else if(!ft_strcmp(command[0], "env"))
     
@@ -60,7 +60,7 @@ static void execute_the_builtin(char **command, char **PWD, t_environ **s_enviro
     else if(!ft_strcmp(command[0], "unset"))
     {
         printf("unset\n");
-        //unset_executing(command, s_environ);
+        unset_executing(command, s_environ);
     }
     else if(!ft_strcmp(command[0], "exit"))
     {
@@ -68,18 +68,16 @@ static void execute_the_builtin(char **command, char **PWD, t_environ **s_enviro
         // exit_executing("exit");
     }  
 }
-static void execution_entery(char **command, char *PWD, char *OLDPWD)
+static void execution_entery(char **command, char **PWD, char **OLDPWD)
 {
     
     int built_in;
     static t_environ *environ;
-    static char *pwd;
-    static char *oldpwd;
 
-    if(!pwd)
-        pwd = ft_strdup(PWD);
-    if(!oldpwd)
-        oldpwd = ft_strdup(OLDPWD);
+    // if(!pwd)
+    //     pwd = ft_strdup(PWD);
+    // if(!oldpwd)
+    //     oldpwd = ft_strdup(OLDPWD);
 
     if(!environ)
         environ = making_the_environ_struct();
@@ -88,12 +86,12 @@ static void execution_entery(char **command, char *PWD, char *OLDPWD)
         return;
     built_in = is_built_in(command);
     if(built_in == 1)
-        execute_the_builtin(command, &pwd,&environ,&oldpwd);
+        execute_the_builtin(command, PWD,&environ,OLDPWD);
     else
         printf("print with childy\n");
 }
 
-void recursion(t_tree *tree, char *PWD, char *OLDPWD)
+void recursion(t_tree *tree, char **PWD, char **OLDPWD)
 {
     int i;
 
