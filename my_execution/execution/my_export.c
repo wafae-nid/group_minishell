@@ -56,19 +56,6 @@ static int var_name_end(char *str)
     }
     return(i);
 }
-// static int non_valid_identifier(char c)
-// {
-//     if(c == '*' || c == '%' || c == '#' 
-//          || c == '-' || c == '(' || c == ')' 
-//          || c == '!' || c == '{' || c == '}' 
-//          || c == '[' || c == ']' || c == '?' || c == '&'
-//          || c == '~' || c == '.' || c == '@' || c == ';' || c == ':')
-//     {
-//         return(1);
-//     }
-//     else
-//         return(0);
-// }
 
 static int valid_var_name(char *str, int count)
 {
@@ -94,27 +81,6 @@ static int valid_var_name(char *str, int count)
     return(1);
     
 }
-
-// static void start_of_arguments(t_com *command,char **oldpromt)
-// {
-//     int i;
-    
-//     i = 0;
-
-//      while((*oldpromt) && is_while_space((*oldpromt)[0]))
-//     {
-//         (*oldpromt)++;
-//     }
-//     while((*oldpromt)[0] && (command->command[0] && (command->command)[0][0] == (*oldpromt)[0]))
-//     {
-//         (command->command[0])++;
-//         (*oldpromt)++;
-//     }
-//     while((*oldpromt) && is_while_space((*oldpromt)[0]))
-//     {
-//         (*oldpromt)++;
-//     }
-// }
 static int count_lengh_value_str_export(char *str)
 {
     int i;
@@ -226,50 +192,6 @@ static char  **split_environ(char *str)
      return(splited_export_char);
 }
 
-// static t_environ  *ft_lstnew_environ(char *str)
-// {
-// 	t_environ	*newnode;
-//     char       **splited_export;
-
-// 	newnode = (t_environ *)malloc(sizeof(t_environ));
-// 	if (!newnode)
-// 		return (NULL);
-//     // if(!strcmp(str, ""))
-//     // {
-//     //     newnode->var =NULL;
-//     //     newnode->operator= NULL;
-//     //     newnode->value= NULL;
-//     //     newnode->next = NULL;
-//     // }
-//     // else
-//     // {
-//     splited_export = split_environ(str);
-//     if(!splited_export)
-//         return(NULL);
-// 	newnode->var =splited_export[0];
-//     newnode->operator= splited_export[1];
-//     newnode->value= splited_export[2];
-// 	newnode->next = NULL;
-//     return(newnode);
-// }
-// void	ft_lstadd_back_environ(t_environ **lst, t_environ *new)
-// {
-// 	t_environ	*temp;
-
-// 	if (new == NULL)
-// 		return ;
-// 	if (!*lst)
-// 	{
-// 		*lst = new;
-// 		return ;
-// 	}
-// 	temp = *lst;
-// 	while ((temp)->next != NULL)
-// 	{
-// 		(temp) = (temp)->next;
-// 	}
-// 	(temp)->next = new;
-// }
 
 static int is_the_var_in_environ(char *variable, t_environ *environ)
 {
@@ -285,36 +207,6 @@ static int is_the_var_in_environ(char *variable, t_environ *environ)
    }
    return(0);
 }
-// static void replace_node(t_environ **new, t_environ **environ) {
-//     t_environ *tmp = *environ;
-//     t_environ *prev = NULL; // Keeps track of the previous node
-//     char *new_value;
-
-//     while (tmp) {
-//         if (!strcmp(tmp->var, (*new)->var)) {
-//             // If operator is "+=", concatenate values
-//             if (!strcmp((*new)->operator, "+=")) {
-//                 new_value = ft_strjoin(tmp->value, (*new)->value, GLOBAL);
-//                 if (!new_value)
-//                     return; // Exit if memory allocation fails
-//                 free((*new)->value); // Free old value of *new
-//                 (*new)->value = new_value;
-//             }
-
-//             // Update pointers
-//             (*new)->next = tmp->next; // New node points to the next of the old one
-//             if (prev)
-//                 prev->next = *new; // Previous node points to the new one
-//             else
-//                 *environ = *new; // Update the head of the list if replacing the first node
-
-//             free(tmp); // Free old node
-//             return;    // Exit after replacement
-//         }
-//         prev = tmp;
-//         tmp = tmp->next; // Move to the next node
-//     }
-// }
 
 static void replace_node(t_environ **new, t_environ **environ)
 {
@@ -329,7 +221,6 @@ static void replace_node(t_environ **new, t_environ **environ)
         if((tmp->next) && !strcmp((tmp->next)->var, (*new)->var))
         {
             current = tmp;
-            // if((tmp->next)->next);
             tmp = (tmp->next)->next;
             if(!strcmp((*new)->operator, "+="))
             {
@@ -366,11 +257,7 @@ static void make_export_struct(char **splited_arg, t_environ **environ)
     int count ;
     int i;
     
-    (void)environ;
-    (void)splited_arg;
-    printf("wafae\n");
-    
-   (1&& (count = 0), (i = 0 ));
+   (1&& (count = 0), (i = 1 ));
     if(splited_arg)
     {
         while(splited_arg[i])
@@ -386,12 +273,6 @@ static void make_export_struct(char **splited_arg, t_environ **environ)
             }   
             i++;
         }
-        // current = *environ;
-        // while(current)
-        // {
-        //     printf("%s\n", current->var);
-        //     current= current->next;
-        // }  
     }
 }
 
@@ -417,6 +298,24 @@ static int input_struct_handling(char *arg)
  
 }
 
+static void export_no_arg(t_environ **environ)
+{
+    t_environ *current;
+
+    current = (*environ);
+    while(current)
+    {
+        printf("declare -x ");
+        printf("%s", current->var);
+        if(current->value)
+        {
+            printf("=");
+            printf("\"%s\"", current->value);
+        }
+        printf("\n");
+        current = current->next;
+    }
+}
 void export_parssing(char **command, t_environ **environ)
 {
     int i;
@@ -425,15 +324,17 @@ void export_parssing(char **command, t_environ **environ)
     if(command)
     {
         i = 1;
-        // start_of_arguments(command,&oldpromt);
+        if(!command[1])
+        {
+            export_no_arg(environ);
+            return;
+        }
         while(command[i])
         {
             if(valid_position_export(command[i]))
             {
                 if(input_struct_handling(command[i]))
-                {
                     return;
-                }
             }
             else 
             {

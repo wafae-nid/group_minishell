@@ -37,13 +37,16 @@ void executing_env(t_environ **environ)
     current = *environ;
     while(current)
     {
-        if(current->value)
-        {
+        // if(current->value)
+        // {
             printf("%s", current->var);
-            printf("=");
-            printf("%s", current->value);
+            if(current->value)
+            {
+                printf("=");
+                printf("%s", current->value);
+            }
             printf("\n");
-        }
+        // }
         current= current->next;
     }
     

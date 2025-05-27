@@ -47,21 +47,13 @@ static void execute_the_builtin(char **command, char **PWD, t_environ **s_enviro
         cd_execution(command, PWD,s_environ, OLDPWD);
     }
     else if(!ft_strcmp(command[0], "pwd"))
-        pwd_execution(command);
+        pwd_execution(command,PWD);
     else if(!ft_strcmp(command[0], "export"))
-    {
-        printf("export\n");
         export_parssing(command, s_environ);
-    }
     else if(!ft_strcmp(command[0], "env"))
-    
         executing_env(s_environ);
-
     else if(!ft_strcmp(command[0], "unset"))
-    {
-        printf("unset\n");
         unset_executing(command, s_environ);
-    }
     else if(!ft_strcmp(command[0], "exit"))
     {
         printf("execute exit");
