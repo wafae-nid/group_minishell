@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:39:35 by zatalbi           #+#    #+#             */
-/*   Updated: 2025/05/27 22:15:35 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/05/29 00:06:34 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,6 @@ int	main(void)
 	
 	while (1)
 	{	
-		
-		
 		prompt = ft_strjoin(PWD, "> ");
 		line = readline(prompt);
 		if (!line)
@@ -131,8 +129,4 @@ int	main(void)
 	}
 	 rl_clear_history();
 	exit(0);
-// 	tree = ft_parser("echo -nnnnn helloo world | cd b | \"hello  world \"", 1337);
-// 	show_the_tree(tree);
-// 	recursion(tree);
-// 	ft_free_tree(tree);
 }

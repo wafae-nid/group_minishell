@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 14:51:47 by zatalbi           #+#    #+#             */
-/*   Updated: 2025/05/27 22:27:27 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/05/29 00:11:49 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,8 +125,19 @@ t_environ *making_the_environ_struct(void);
 void  pwd_execution(char **command, char **PWD);
 void recursion(t_tree *tree, char **PWD, char **OLDPWD);
 void unset_executing(char **command, t_environ **environ);
-void export_parssing(char **command, t_environ **environ);
+void export_execution(char **command, t_environ **environ);
 int is_the_var_in_environ(char *variable, t_environ *environ);
-
+char  **split_environ(char *str);
+void fill_in_var(char **var, char *str);
+int valid_position_export(char *str);
+int var_name_end(char *str);
+int valid_var_name(char *str, int count);
+int ft_is_a_numb(char c);
+int is_while_space(char c);
+void make_export_struct(char **command, t_environ **environ);
+void  cd_oldpwd(t_environ **environ, char **PWD, char **OLDPWD);
+char *telda_full_path(char *telda_path);
+int is_home_set(t_environ **environ);
+void changing_nodes(t_environ **environ, char *var , char *new_value);
 
 #endif
