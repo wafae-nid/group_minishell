@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 14:51:47 by zatalbi           #+#    #+#             */
-/*   Updated: 2025/05/29 00:11:49 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/05/29 03:05:48 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,9 @@ void	ft_free_argv(char **argv);
 
 /* ************************************** */
 
-# define PATH "PATH=/home/wnid-hsa/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/wnid-hsa/.local/bin"
-
+# define PATH_ "PATH=/home/wnid-hsa/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/wnid-hsa/.local/bin"
+# define PWD_ "/home/wnid-hsa/Desktop/our_minishell"
+# define OLDPWD_ "/home/wnid-hsa/Desktop"
  
 typedef struct s_environ
 {
@@ -123,7 +124,7 @@ t_environ  *ft_lstnew_environ(char *str);
 void	ft_lstadd_back_environ(t_environ **lst, t_environ *new);
 t_environ *making_the_environ_struct(void);
 void  pwd_execution(char **command, char **PWD);
-void recursion(t_tree *tree, char **PWD, char **OLDPWD);
+void recursion(t_tree *tree, char **pwd, char **OLDPWD);
 void unset_executing(char **command, t_environ **environ);
 void export_execution(char **command, t_environ **environ);
 int is_the_var_in_environ(char *variable, t_environ *environ);

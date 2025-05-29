@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:39:35 by zatalbi           #+#    #+#             */
-/*   Updated: 2025/05/29 00:06:34 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/05/29 03:04:28 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,12 +108,8 @@ int	main(void)
 	static char *OLDPWD;
 	char	*prompt;
 
-	if(!PWD || !OLDPWD)
-	{
-		PWD = getenv("PWD");
-		OLDPWD = getenv("OLDPWD");
-	}
-	
+	PWD = ft_strdup(PWD_);
+	OLDPWD = ft_strdup(OLDPWD_);
 	while (1)
 	{	
 		prompt = ft_strjoin(PWD, "> ");
@@ -123,10 +119,10 @@ int	main(void)
 		add_history(line);
 		tree = ft_parser(line, 1337);
 		show_the_tree(tree);
-		recursion(tree,&PWD, &OLDPWD);
+		recursion(tree,&PWD,&OLDPWD);
 		ft_free_tree(tree);
 		free(line);
 	}
-	 rl_clear_history();
+	rl_clear_history();
 	exit(0);
 }

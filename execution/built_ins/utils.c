@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 22:07:23 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/05/28 23:21:07 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/05/29 03:40:41 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static int count_lengh_var_str_export(char *str)
     int i ;
     
     i = 0;
+    if(!str)
+        return(-1);
     while(str[i] &&(str[i] != '=' && str[i]!= '+'))
     {
         i++;
@@ -60,6 +62,8 @@ char  **split_environ(char *str)
     char **splited_char;
     int  lengh_var_str;
 
+    if(!str)
+        return(NULL);
     lengh_var_str = count_lengh_var_str_export(str);
     splited_char = splited_export_command(str);
     if(str[lengh_var_str] == '=')

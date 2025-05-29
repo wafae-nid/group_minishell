@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 22:06:56 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/05/28 23:41:53 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/05/29 03:35:56 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 int is_the_var_in_environ(char *variable, t_environ *environ)
 {
     t_environ *current = environ;
+    if(!variable)
+        return(-1);
    while(current)
    {
        

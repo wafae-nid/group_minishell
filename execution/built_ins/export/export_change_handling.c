@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 22:05:58 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/05/28 23:59:53 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/05/29 03:44:09 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ static void replace_node(t_environ **new, t_environ **environ)
 
 static void handling_new_changes(t_environ **new, t_environ **environ)
 { 
+    if(!*new)
+        return;
     if(!((*new)->value))
         return;
     else if(!ft_strcmp((*new)->operator, "+=") && !strcmp((*new)->value,""))
@@ -78,7 +80,7 @@ void make_export_struct(char **command, t_environ **environ)
     int count ;
     int i;
     
-   (1&& (count = 0), (i = 1 ));
+   (1 && (count = 0), (i = 1 ));
     if(command)
     {
         while(command[i])
@@ -90,12 +92,13 @@ void make_export_struct(char **command, t_environ **environ)
                 new = ft_lstnew_environ(command[i]);
                 if(is_the_var_in_environ(new->var, *environ))
                     handling_new_changes(&new, environ);
-                else 
-                ft_lstadd_back_environ(environ, new);
+                else
+                    ft_lstadd_back_environ(environ, new);
             }
             else
                 printf("syntax error!");
-            i++;
+            if (command[i][0])
+                i++;
         }
     }
 }
