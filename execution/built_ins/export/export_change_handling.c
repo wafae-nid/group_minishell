@@ -6,7 +6,7 @@
 /*   By: wnid-hsa <wnid-hsa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 22:05:58 by wnid-hsa          #+#    #+#             */
-/*   Updated: 2025/05/29 03:44:09 by wnid-hsa         ###   ########.fr       */
+/*   Updated: 2025/05/29 04:04:18 by wnid-hsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,33 @@ static int input_struct_handling(char *arg)
         return(0);
  
 }
+
+// void make_export_struct(char **command, t_environ **environ) {
+//     t_environ *new;
+//     int i = 1;
+
+//     while (command[i]) 
+//     {
+//         if (valid_position_export(command[i])) {
+//             if (input_struct_handling(command[i])) {
+//                 i++;
+//                 continue;
+//             }
+//             new = ft_lstnew_environ(command[i]);
+//             if (is_the_var_in_environ(new->var, *environ)) {
+//                 handling_new_changes(&new, environ);
+//             } else {
+//                 ft_lstadd_back_environ(environ, new);
+//             }
+//         } else {
+//             printf("syntax error!\n");
+//         }
+//         if (command[i] && command[i][0])
+//             i++;
+//     }
+// }
+
+
 void make_export_struct(char **command, t_environ **environ)
 {
     t_environ *new;
@@ -88,7 +115,10 @@ void make_export_struct(char **command, t_environ **environ)
             if(valid_position_export(command[i]))
             {
                 if(input_struct_handling(command[i]))
+                {   
                     i++;
+                    continue;
+                }
                 new = ft_lstnew_environ(command[i]);
                 if(is_the_var_in_environ(new->var, *environ))
                     handling_new_changes(&new, environ);
@@ -97,8 +127,7 @@ void make_export_struct(char **command, t_environ **environ)
             }
             else
                 printf("syntax error!");
-            if (command[i][0])
-                i++;
+            i++;
         }
     }
 }
